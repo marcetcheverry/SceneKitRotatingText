@@ -156,6 +156,8 @@
 		49E1D0091A833E6200524B10 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0720;
+				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = None;
 				TargetAttributes = {
@@ -407,6 +409,7 @@
 				49E1D0321A833E6300524B10 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		49E1D0331A833E6300524B10 /* Build configuration list for PBXNativeTarget "SceneKitRotatingTextTests" */ = {
 			isa = XCConfigurationList;
@@ -415,6 +418,7 @@
 				49E1D0351A833E6300524B10 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

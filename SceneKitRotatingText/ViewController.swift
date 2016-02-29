@@ -111,13 +111,13 @@ class ViewController: UIViewController {
         // Animation sequence
 
         // Relative rotations on x and y axes
-        var horizontalAction = SCNAction.rotateByAngle(degreesToRadians(-45), aroundAxis: SCNVector3Make(0, 1, 0), duration: 2)
+        let horizontalAction = SCNAction.rotateByAngle(degreesToRadians(-45), aroundAxis: SCNVector3Make(0, 1, 0), duration: 2)
         horizontalAction.timingMode = .EaseInEaseOut
-        var reverseHorizontalAction = horizontalAction.reversedAction()
+        let reverseHorizontalAction = horizontalAction.reversedAction()
 
-        var verticalAction = SCNAction.rotateByAngle(degreesToRadians(-45), aroundAxis: SCNVector3Make(1, 0, 0), duration: 2)
+        let verticalAction = SCNAction.rotateByAngle(degreesToRadians(-45), aroundAxis: SCNVector3Make(1, 0, 0), duration: 2)
         verticalAction.timingMode = .EaseInEaseOut
-        var reverseVerticalAction = verticalAction.reversedAction()
+        let reverseVerticalAction = verticalAction.reversedAction()
 
         // Create a sequence of animations
         var sequence = SCNAction.sequence([
