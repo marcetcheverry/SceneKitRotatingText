@@ -13,12 +13,12 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var sceneView: SCNView!
 
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
 
-    func degreesToRadians (value:Double) -> CGFloat {
-        return (CGFloat)(value * M_PI / 180.0)
+    func degreesToRadians (_ value:Double) -> CGFloat {
+        return (CGFloat)(value * Double.pi / 180.0)
     }
 
     override func viewDidLoad() {
@@ -30,14 +30,14 @@ class ViewController: UIViewController {
         // Light
         let ambientLightNode = SCNNode()
         ambientLightNode.light = SCNLight()
-        ambientLightNode.light!.type = SCNLightTypeAmbient
+        ambientLightNode.light!.type = SCNLight.LightType.ambient
         ambientLightNode.light!.color = UIColor(white: 0.5, alpha: 1.0)
         scene.rootNode.addChildNode(ambientLightNode)
 
         // This will give us some nice shadows
         let omniLightNode = SCNNode()
         omniLightNode.light = SCNLight()
-        omniLightNode.light!.type = SCNLightTypeOmni
+        omniLightNode.light!.type = SCNLight.LightType.omni
         omniLightNode.light!.color = UIColor(white: 1, alpha: 1.0)
         omniLightNode.position = SCNVector3Make(0, 20, 0)
         scene.rootNode.addChildNode(omniLightNode)
@@ -92,7 +92,7 @@ class ViewController: UIViewController {
         // We must pivot the text so that it is centered at 0.5, 0.5
         var minVec = SCNVector3Zero
         var maxVec = SCNVector3Zero
-        if textNode.getBoundingBoxMin(&minVec, max: &maxVec) {
+        if textNode.__getBoundingBoxMin(&minVec, max: &maxVec) {
             let distance = SCNVector3(
                 x: maxVec.x - minVec.x,
                 y: maxVec.y - minVec.y,
@@ -102,7 +102,7 @@ class ViewController: UIViewController {
         }
 
         text.firstMaterial!.diffuse.contents = UIColor(red: 245/255, green: 216/255, blue: 0, alpha: 1)
-        text.firstMaterial!.specular.contents = UIColor.whiteColor()
+        text.firstMaterial!.specular.contents = UIColor.white
 
         scene.rootNode.addChildNode(textNode)
 
@@ -111,13 +111,13 @@ class ViewController: UIViewController {
         // Animation sequence
 
         // Relative rotations on x and y axes
-        let horizontalAction = SCNAction.rotateByAngle(degreesToRadians(-45), aroundAxis: SCNVector3Make(0, 1, 0), duration: 2)
-        horizontalAction.timingMode = .EaseInEaseOut
-        let reverseHorizontalAction = horizontalAction.reversedAction()
+        let horizontalAction = SCNAction.rotate(by: degreesToRadians(-45), around: SCNVector3Make(0, 1, 0), duration: 2)
+        horizontalAction.timingMode = .easeInEaseOut
+        let reverseHorizontalAction = horizontalAction.reversed()
 
-        let verticalAction = SCNAction.rotateByAngle(degreesToRadians(-45), aroundAxis: SCNVector3Make(1, 0, 0), duration: 2)
-        verticalAction.timingMode = .EaseInEaseOut
-        let reverseVerticalAction = verticalAction.reversedAction()
+        let verticalAction = SCNAction.rotate(by: degreesToRadians(-45), around: SCNVector3Make(1, 0, 0), duration: 2)
+        verticalAction.timingMode = .easeInEaseOut
+        let reverseVerticalAction = verticalAction.reversed()
 
         // Create a sequence of animations
         var sequence = SCNAction.sequence([
@@ -131,7 +131,7 @@ class ViewController: UIViewController {
             verticalAction]) // center back
 
         // Make the sequence repeat forever
-        sequence = SCNAction.repeatActionForever(sequence)
+        sequence = SCNAction.repeatForever(sequence)
         textNode.runAction(sequence)
     }
 }
